@@ -1,73 +1,47 @@
-# React + TypeScript + Vite
+# 🛡️ Virtuální Velín (Command Center)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Interaktivní monitorovací systém pro sledování stavu taktických jednotek v reálném čase. Aplikace simuluje biometrická data, stavy vest a detekci pádu.
 
-Currently, two official plugins are available:
+## 📥 Ke stažení (Download)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Nemusíte nic instalovat. Stáhněte si hotovou aplikaci pro váš systém přímo zde:
 
-## React Compiler
+👉 **[STÁHNOUT NEJNOVĚJŠÍ VERZI (Releases)](../../releases/latest)** 👈
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Windows:** Stáhněte soubor `Velin-Windows.exe` a spusťte.
+- **Linux:** Stáhněte soubor `Velin-Linux` (před spuštěním povolte práva: `chmod +x Velin-Linux`).
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🎮 Ovládání
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Aplikace je navržena pro rychlé ovládání klávesnicí bez nutnosti myši.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 🟡 Varování (Warning Level)
+Zobrazí zvýšený stres a tepovou frekvenci přímo v seznamu.
+* **Q** — Soldier Alpha
+* **W** — Soldier Beta
+* **E** — Soldier Black
+* **R** — Soldier Delta
+* **T** — Soldier Sigma
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### 🔴 Kritický Poplach (Critical Alert)
+Otevře detailní "Mřížku smrti" se zobrazením zásahů do vesty a detekcí pádu.
+* **A** — Soldier Alpha
+* **S** — Soldier Beta
+* **D** — Soldier Black
+* **F** — Soldier Delta
+* **G** — Soldier Sigma
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 🔄 Reset
+* **ESC** — Okamžitě zruší všechny poplachy a vrátí systém do normálu.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🛠️ Použité technologie
+
+Projekt kombinuje moderní webový frontend se stabilním Python backendem, zabaleným do jedné spustitelné aplikace.
+
+* **Frontend:** React, TypeScript, Tailwind CSS
+* **Backend:** Python, FastAPI
+* **Balíčkování:** PyInstaller (automatický build přes GitHub Actions)
