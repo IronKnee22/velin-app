@@ -1,0 +1,77 @@
+name: Build Velin App
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  # 1. Úkol: Vyrobit Windows .EXE (pro kolegy/učitele)
+  build-windows:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    # Nastavení Node.js a výroba Reactu
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    - name: Install and Build Frontend
+      run: |
+        npm install
+        npm run build
+
+    # Nastavení Pythonu a výroba EXE
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+    - name: Build EXE with PyInstaller
+      # --noconsole znamená, že se neotevře černé okno, jen aplikace
+      # --add-data "dist;dist" přibalí složku dist do exe (na Windows se používá středník)
+      run: |
+        pyinstaller --name Velin_Windows --onefile --noconsole --add-data "dist;dist" main.py
+
+    # Nahrání výsledku, abys ho mohl stáhnout
+    - name: Upload Windows Exe
+      uses: actions/upload-artifact@v4
+      with:
+        name: Velin-Windows-App
+        path: dist/Velin_Windows.exe
+
+  # 2. Úkol: Vyrobit Linux aplikaci (pro tebe)
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    - name: Install and Build Frontend
+      run: |
+        npm install
+        npm run build
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+    - name: Build Binary with PyInstaller
+      # Na Linuxu se používá dvojtečka "dist:dist"
+      run: |
+        pyinstaller --name Velin_Linux --onefile --noconsole --add-data "dist:dist" main.py
+
+    - name: Upload Linux Binary
+      uses: actions/upload-artifact@v4
+      with:
+        name: Velin-Linux-App
+        path: dist/Velin_Linux
